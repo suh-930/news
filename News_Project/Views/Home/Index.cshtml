@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container">
+    <div class="input-group">
+        <input type="text" id="searchtext" class="form-control" placeholder="Search News by Keyword" name="search">
+        <div class="input-group-btn">
+            <button class="btn btn-default search" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container-fluid" style="padding-top: 0px; text-align:center;padding-bottom: 0px;">
+    <h3 class="margin">News Feeds</h3><br>
+</div>
+<div id="mainnews" class="container">
+    <div class="row">
+        <div class="col-sm-12 news">
+            <a href=""><h2>Search ...</h2></a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', ".search", function () {
+                callNews($("#searchtext").val());
+            });
+            $(document).on('enter', "#searchtext", function () {
+                callNews($("#searchtext").val());
+            });
+            $(document).on('click', ".callnews", function (e) {
+                callNews($(e.target).attr("data-type"));
+            });
+            var callNews = function(keyword) {
+                var key = "h3iaqjWE4aRugxTGCvxWpQuLO12f3YKSjfRHIXE5ERvJVXUk";
+                var url = 'https://api.currentsapi.services/v1/search?' +
+                    'keywords=' + keyword + '&language=en&' +
+                    'apiKey=' + key;
+                var req = new Request(url);
+                $(".mainSection").addClass("blur");
+                $(".loader").addClass("show");
+                fetch(req).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    $(".mainSection").removeClass("blur");
+                    $(".loader").addClass("hide");
+                    $(".loader").removeClass("show");
+                    $("#mainnews").html("");
+                    if (data.status != "ok") {
+                        $("#mainnews").html(`<div class="row">
+                                                    <div class="col-sm-12 news">
+                                                        <a href=""><h2>No Record Find</h2></a>
+                                                    </div>
+                                                </div>`);
+                    }
+                    for (var i = 0; i < data.news.length; i++) {
+                        var date = new Date(data.news[i].published);
+                        var html = `<div class="row">
+                                                <div class="col-sm-12 news">
+                                                    <a target="_blank" href="`+ data.news[i].url + `"><h2>` + data.news[i].title + `</h2></a>
+                                                    <p>Author : <span>`+ data.news[i].author + `</span> </p>
+                                                    <p>Date: <span>`+ date.toDateString() + `</span></p>
+                                                    <p>`+ data.news[i].description + `</p>
+                                                </div>
+                                            </div>`;
+                        $("#mainnews").append(html);
+                    }
+                }).catch(function () {
+                    $(".mainSection").removeClass("blur");
+                    $(".loader").removeClass("show");
+                    $(".loader").addClass("hide");
+                    $("#mainnews").html(`<div class="row">
+                                                    <div class="col-sm-12 news">
+                                                        <a href=""><h2>No Record Find</h2></a>
+                                                    </div>
+                                                </div>`);
+                });;
+            }
+        });
+    </script>
+}

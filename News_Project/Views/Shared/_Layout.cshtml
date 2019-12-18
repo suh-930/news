@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+    .navbar {
+        font-weight: bolder;
+    }
+
+    body {
+        font: 20px Montserrat, sans-serif;
+        line-height: 1.8;
+        background-color: white;
+    }
+
+    a:hover, a:focus {
+        text-decoration: none !important;
+    }
+
+    .news {
+        box-shadow: 4px 4px #888888;
+        border: solid 1px #888888;
+        background-color: white;
+        margin-bottom: 15px;
+        border-radius:10px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .margin {
+        margin-bottom: 45px;
+    }
+
+    .bg-1 {
+        background-color: #1abc9c; /* Green */
+        color: #ffffff;
+    }
+
+    .bg-2 {
+        background-color: #474e5d; /* Dark Blue */
+        color: #ffffff;
+    }
+
+    .bg-3 {
+    }
+
+    .bg-4 {
+        background-color: #2f2f2f; /* Black Gray */
+        color: #fff;
+    }
+
+    .container-fluid {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+
+    .navbar {
+        font-family: arial;
+        margin-bottom: 20px !important;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+        color: white !important;
+        background-color: #f68e2d;
+    }
+
+    .navbar-nav li a:hover {
+        color: white !important;
+    }
+
+    .blur {
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+        height: 100px;
+        
+    }
+
+    .loader {
+        z-index: 2;
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #f68e2d;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .hide {
+        display: none !important;
+    }
+
+    .show {
+        display: block !important;
+    }
+    .navbar-default .navbar-nav > li{
+            border-left: 1px solid #564747;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: white !important;
+        cursor:pointer !important;
+        font-size:14px !important;
+    }
+
+    .navbar-default .navbar-brand {
+        color: white !important;
+        font-size:20px !important;
+    }
+        a {
+           color: #3c3c3c;
+        }
+        a:hover {
+           color: #3c3c3c;
+        }
+  </style>
+</head>
+<body>
+    <div class="mainSection">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid" style="        padding-top: 0px;
+        padding-bottom: 0px;">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">DailyNewsBit</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="callnews" data-type="Technology"><a data-type="Technology" href="#">Technology</a></li>
+                    <li class="callnews" data-type="Crime"><a data-type="Crime" href="#">Crime</a></li>
+                    <li class="callnews" data-type="Trending"><a data-type="Trending" href="#">Trending</a></li>
+                    <li class="callnews" data-type="Social"><a data-type="Social" href="#">Social</a></li>
+                </ul>
+            </div>
+        </nav>
+        @RenderBody()
+    </div>
+    <div class="loader" style="        display: none"></div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
